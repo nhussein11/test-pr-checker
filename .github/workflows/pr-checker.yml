@@ -16,15 +16,11 @@ jobs:
             const labelToBlock = "B2 - Block";
             const prNumber = context.payload.pull_request.number;
 
-            // log all the labels on the PR
-            console.log(`Listing labels for PR ${prNumber}`);
             const { data: labels } = await github.rest.issues.listLabelsOnIssue({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: prNumber
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber
             });
-
-            console.log(`Labels on PR ${prNumber}: ${JSON.stringify(labels)}`);
 
             const hasBlockLabel = labels.some(label => label.name === labelToBlock);
 
